@@ -13,6 +13,7 @@ import {
   ChevronRight,
   AlertTriangle,
   Play,
+  MessageSquare,
 } from 'lucide-react';
 import {
   ResponsiveContainer,
@@ -81,6 +82,13 @@ export const FreelancerDashboard: React.FC = () => {
           >
             <Sparkles className="w-3.5 h-3.5 text-cyan-300" />
             <span>Open ScopeGuard AI</span>
+          </button>
+          <button
+            onClick={() => setActiveTab('social-integrations')}
+            className="flex items-center space-x-2 px-3.5 py-2.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 font-bold text-xs transition-colors cursor-pointer"
+          >
+            <MessageSquare className="w-3.5 h-3.5 text-emerald-600" />
+            <span>Social & Webhooks</span>
           </button>
           <button
             onClick={() => setActiveTab('projects')}

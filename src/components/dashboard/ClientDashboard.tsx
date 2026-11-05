@@ -13,6 +13,7 @@ import {
   Sparkles,
   Send,
   HelpCircle,
+  MessageSquare,
 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 
@@ -72,6 +73,13 @@ export const ClientDashboard: React.FC = () => {
         </div>
 
         <div className="flex items-center space-x-3">
+          <button
+            onClick={() => setActiveTab('social-integrations')}
+            className="flex items-center space-x-2 px-3.5 py-2.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 font-bold text-xs transition-colors cursor-pointer"
+          >
+            <MessageSquare className="w-3.5 h-3.5 text-emerald-600" />
+            <span>Social & Webhooks</span>
+          </button>
           <button
             onClick={() => setActiveTab('submit-scope')}
             className="flex items-center space-x-2 px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-md shadow-blue-500/20 transition-all cursor-pointer"

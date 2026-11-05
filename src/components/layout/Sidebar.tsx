@@ -13,6 +13,7 @@ import {
   ArrowRightLeft,
   FilePlus2,
   CheckSquare,
+  MessageSquare,
 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 
@@ -56,6 +57,13 @@ export const Sidebar: React.FC = () => {
       highlight: true,
     },
     { id: 'milestones', label: 'Milestones', icon: Coins },
+    {
+      id: 'social-integrations',
+      label: 'Social & Webhooks',
+      icon: MessageSquare,
+      badge: 'Meta Live',
+      badgeColor: 'bg-emerald-500/20 text-emerald-300 font-bold',
+    },
     { id: 'version-history', label: 'Version History', icon: History },
     {
       id: 'notifications',
@@ -88,6 +96,13 @@ export const Sidebar: React.FC = () => {
       highlight: pendingClientProposals > 0,
     },
     { id: 'milestones', label: 'Milestone Escrow', icon: Coins },
+    {
+      id: 'social-integrations',
+      label: 'Social & Webhooks',
+      icon: MessageSquare,
+      badge: 'Meta Live',
+      badgeColor: 'bg-emerald-500/20 text-emerald-300 font-bold',
+    },
     { id: 'version-history', label: 'Agreement History', icon: History },
     {
       id: 'notifications',
@@ -104,6 +119,13 @@ export const Sidebar: React.FC = () => {
     { id: 'admin-users', label: 'User Directory', icon: Users },
     { id: 'admin-projects', label: 'All Projects', icon: FolderGit2 },
     { id: 'admin-audits', label: 'Scope Audits', icon: ShieldAlert },
+    {
+      id: 'social-integrations',
+      label: 'Social & Webhooks',
+      icon: MessageSquare,
+      badge: 'Meta Live',
+      badgeColor: 'bg-emerald-500/20 text-emerald-300 font-bold',
+    },
     { id: 'version-history', label: 'Contract Versions', icon: History },
     { id: 'milestones', label: 'Escrow Ledgers', icon: Coins },
   ];

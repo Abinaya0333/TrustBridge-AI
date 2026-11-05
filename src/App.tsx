@@ -14,6 +14,7 @@ import { MilestoneTracker } from './components/milestones/MilestoneTracker';
 import { ClientList } from './components/clients/ClientList';
 import { SettingsView } from './components/settings/SettingsView';
 import { DemoWalkthroughBar } from './components/walkthrough/DemoWalkthroughBar';
+import { SocialIntegrationsView } from './components/integrations/SocialIntegrationsView';
 
 const AppContent: React.FC = () => {
   const { activeTab, currentUser } = useApp();
@@ -67,6 +68,9 @@ const AppContent: React.FC = () => {
 
       case 'settings':
         return <SettingsView />;
+
+      case 'social-integrations':
+        return <SocialIntegrationsView />;
 
       default:
         if (currentUser.role === 'freelancer') return <FreelancerDashboard />;

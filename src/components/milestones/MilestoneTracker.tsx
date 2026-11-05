@@ -222,12 +222,17 @@ export const MilestoneTracker: React.FC = () => {
                             </button>
                           ) : (
                             <button
+                              disabled={isInReview}
                               onClick={() =>
                                 updateMilestoneStatus(currentProject.id, ms.id, 'in_review')
                               }
-                              className="px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-colors"
+                              className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-colors ${
+                                isInReview
+                                  ? 'bg-amber-100 text-amber-800 border border-amber-300'
+                                  : 'bg-blue-600 hover:bg-blue-500 text-white cursor-pointer'
+                              }`}
                             >
-                              Submit for Approval
+                              {isInReview ? 'Awaiting Client Review' : 'Submit for Approval'}
                             </button>
                           )}
                         </>

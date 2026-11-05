@@ -12,6 +12,7 @@ import {
   Layers,
 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
+import { AuthModal } from '../auth/AuthModal';
 
 export const Navbar: React.FC = () => {
   const {
@@ -30,6 +31,7 @@ export const Navbar: React.FC = () => {
 
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [showNotifMenu, setShowNotifMenu] = useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
   const userNotifications = notifications.filter(
     (n) => n.recipientId === currentUser.id || n.recipientId === 'all'
@@ -264,7 +266,17 @@ export const Navbar: React.FC = () => {
                     })}
                   </div>
 
-                  <div className="mt-2 pt-2 border-t border-slate-800 px-2">
+                  <div className="mt-2 pt-2 border-t border-slate-800 px-2 space-y-1">
+                    <button
+                      onClick={() => {
+                        setIsAuthModalOpen(true);
+                        setShowUserMenu(false);
+                      }}
+                      className="w-full flex items-center justify-center space-x-1.5 px-3 py-1.5 text-xs text-blue-400 hover:text-blue-300 hover:bg-blue-950/30 rounded-lg transition-colors font-bold"
+                    >
+                      <Shield className="w-3.5 h-3.5" />
+                      <span>Supabase Auth & Roles</span>
+                    </button>
                     <button
                       onClick={() => {
                         if (confirm('Reset demo data to initial state? This clears changes and resets to Step 1.')) {
@@ -284,6 +296,9 @@ export const Navbar: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Supabase Authentication & Profile Modal */}
+      <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
     </header>
   );
 };

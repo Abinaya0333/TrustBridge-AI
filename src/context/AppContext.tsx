@@ -16,6 +16,7 @@ import {
   INITIAL_CHANGE_REQUESTS,
   INITIAL_NOTIFICATIONS,
 } from '../data/seedData';
+import { api } from '../services/api';
 
 interface AppContextType {
   currentUser: User;
@@ -59,7 +60,7 @@ interface AppContextType {
   rejectRevisedProposal: (requestId: string, reason?: string) => void;
   
   // Milestones Actions
-  updateMilestoneStatus: (projectId: string, milestoneId: string, status: ProjectMilestone['status']) => void;
+  updateMilestoneStatus: (projectId: string, milestoneId: string, status: ProjectMilestone['status']) => void | Promise<void>;
   addProjectMilestone: (projectId: string, milestone: Omit<ProjectMilestone, 'id' | 'projectId' | 'simulatedTxId'>) => void;
   
   // Notification Actions
@@ -650,7 +651,23 @@ Both parties have agreed to these terms transparently via TrustBridge ScopeGuard
   };
 
   // Milestone updates
-  const updateMilestoneStatus = (projectId: string, milestoneId: string, status: ProjectMilestone['status']) => {
+  const updateMilestoneStatus = async (projectId: string, milestoneId: string, status: ProjectMilestone['status']) => {
+    // Sync with backend escrow engine
+    try {
+      if (status === 'escrow_funded') {
+        const initRes = await api.payments.initialize(projectId, milestoneId, currentUser.id);
+        if (initRes.success && initRes.transaction) {
+          await api.payments.lock(initRes.transaction.id, currentUser.id);
+        }
+      } else if (status === 'in_review') {
+        await api.milestones.submit(milestoneId, 'Deliverable submitted for client review', currentUser.id);
+      } else if (status === 'released') {
+        await api.milestones.approve(milestoneId, currentUser.id);
+      }
+    } catch (e) {
+      console.warn('Backend payment sync fallback:', e);
+    }
+
     setProjects((prev) =>
       prev.map((p) => {
         if (p.id !== projectId) return p;
