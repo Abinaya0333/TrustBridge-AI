@@ -1,0 +1,6 @@
+{
+  "name": "TrustBridge AI",
+  "description": "AI-powered freelancer-client trust & project management platform with ScopeGuard AI for automated scope creep detection, agreement versioning, and transparent change negotiations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
